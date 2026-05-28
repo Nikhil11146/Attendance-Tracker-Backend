@@ -43,6 +43,10 @@ export const updateSubject = async (req, res, next) => {
 
         const subject = await Subject.findById(req.params.id);
 
+        if(!subject) {
+            throw new ApiError(404, "No subject found.");
+        }
+
         if(!subject.user.equals(req.user.id)) {
             throw new ApiError(403, "Forbidden");
         }
@@ -73,6 +77,10 @@ export const deleteSubject = async (req, res, next) => {
     try {
         const subject = await Subject.findById(req.params.id);
 
+        if(!subject) {
+            throw new ApiError(404, "No subject found.");
+        }
+
         if(!subject.user.equals(req.user.id)) {
             throw new ApiError(403, "Forbidden");
         }
@@ -91,6 +99,10 @@ export const deleteSubject = async (req, res, next) => {
 export const getSubject = async (req, res, next) => {
     try {
         const subject = await Subject.findById(req.params.id);
+
+        if(!subject) {
+            throw new ApiError(404, "No subject found.");
+        }
 
         if(!subject.user.equals(req.user.id)) {
             throw new ApiError(403, "Forbidden");

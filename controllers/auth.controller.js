@@ -18,6 +18,10 @@ export const signUp = async(req, res, next) => {
             throw new ApiError(409, "User already exists");
         }
 
+        if(!process.env.JWT_SECRET) {
+            throw new ApiError(402, "JWT_SECRET missing");
+        }
+
         if(key === ADMIN_KEY) role = 'admin';
         else role = 'user';
 

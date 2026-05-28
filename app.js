@@ -7,12 +7,16 @@ import authRouter from "./routes/auth.routes.js";
 import {errorMiddleware} from "./middlewares/error.middleware.js";
 import {connectDB} from "./database/mongodb.js";
 import {authMiddleware} from "./middlewares/auth.middleware.js";
+import helmet from "helmet";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(helmet());
+app.use(cors());
 // arcjet middlewareHello World!
 
 app.use('/v1/api/auth', authRouter);
@@ -22,7 +26,7 @@ app.use('/v1/api/subjects', authMiddleware, subjectRouter);
 app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello Welcome to Attendance Tracker Management V1');
 })
 
 app.listen(PORT, async () => {

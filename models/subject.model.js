@@ -17,10 +17,12 @@ const subjectSchema = new mongoose.Schema({
     totalClasses: {
         type: Number,
         required: true,
+        min: [0, 'Minimum: 0']
     },
     attendedClasses: {
         type: Number,
         required: true,
+        min: [0, 'Minimum: 0'],
         validate: {
             validator(value) {
                 return value <= this.totalClasses;

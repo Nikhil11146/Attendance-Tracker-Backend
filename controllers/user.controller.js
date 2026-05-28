@@ -48,6 +48,10 @@ export const updateUser = async (req, res, next) => {
 
         const { password } = req.body;
 
+        if(!password) {
+            throw new ApiError(400, "Password required");
+        }
+
         const user = await User.findById(id);
 
         const salt = await bcrypt.genSalt(10);
