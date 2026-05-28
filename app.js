@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 app.use('/v1/api/auth', authRouter);
 app.use('/v1/api/users', authMiddleware, userRouter);
-app.use('/v1/api/subjects', subjectRouter);
+app.use('/v1/api/subjects', authMiddleware, subjectRouter);
 
 app.use(errorMiddleware);
 

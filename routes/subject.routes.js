@@ -1,21 +1,22 @@
 import { Router } from "express";
+import {
+    createSubject,
+    deleteSubject,
+    getAllSubjects,
+    getSubject,
+    updateSubject
+} from "../controllers/subject.controller.js";
 
 const subjectRouter = Router();
 
-subjectRouter.get('/', (req, res) => {
-    res.send('GET all Subjects');
-})
+subjectRouter.get('/', getAllSubjects);
 
-subjectRouter.get('/:id', (req, res) => {
-    res.send('GET subject details ' + req.params.id);
-})
+subjectRouter.get('/:id', getSubject);
 
-subjectRouter.put('/:id', (req, res) => {
-    res.send('PUT subject details');
-})
+subjectRouter.post('/', createSubject);
 
-subjectRouter.delete('/:id', (req, res) => {
-    res.send('DELETE subject details');
-})
+subjectRouter.put('/:id', updateSubject);
+
+subjectRouter.delete('/:id', deleteSubject);
 
 export default subjectRouter;

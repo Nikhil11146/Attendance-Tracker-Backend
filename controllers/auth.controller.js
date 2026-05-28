@@ -26,7 +26,7 @@ export const signUp = async(req, res, next) => {
 
         const [newUser] = await User.create([{ name, password: hashedPassword, role }], { session });
 
-        const token = jwt.sign({ userId: newUser._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+        const token = jwt.sign({ userId: newUser._id, tokenVersion: newUser.tokenVersion }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
         await session.commitTransaction();
         session.endSession();
@@ -53,16 +53,18 @@ export const signIn = async(req, res, next) => {
         const user = await User.findOne({ name }).select("+password");
 
         if(!user) {
-            throw new ApiError(402, "Incorrect username or password");
+            throw new ApiError(401, "Incorrect username or password");
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(!isPasswordValid) {
-            throw new ApiError(402, "Incorrect username or password");
+            throw new ApiError(401, "Incorrect username or password");
         }
 
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+        const token = jwt.sign({ userId: user._id, tokenVersion: user.tokenVersion }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+
+        user.password = undefined;
 
         res.status(201).json({
             success: true,
@@ -74,6 +76,36 @@ export const signIn = async(req, res, next) => {
         })
 
     } catch (error) {
+        next(error);
+    }
+}
+
+export const logoutAll = async(req, res, next) => {
+    try {
+        const { name, password } = req.body;
+
+        const user = await User.findOne({ name }).select("+password");
+
+
+        if(!user) {
+            throw new ApiError(401, "Incorrect username or password");
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if(!isPasswordValid) {
+            throw new ApiError(401, "Incorrect username or password");
+        }
+
+        user.tokenVersion += 1;
+
+        await user.save();
+
+        res.status(201).json({
+            success: true,
+            message: "All Devices Logged Out",
+        })
+    } catch(error) {
         next(error);
     }
 }

@@ -18,7 +18,7 @@ export const authMiddleware = async (req, res, next) => {
 
         const user = await User.findById(decoded.userId);
 
-        if(!user) {
+        if(!user || user.tokenVersion !== decoded.tokenVersion) {
             return res.status(401).json({ success:false, message: 'Unauthorized' });
         }
 

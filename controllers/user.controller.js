@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import Subject from "../models/subject.model.js";
+import ApiError from "../classes/apiError.class.js";
 
 export const getAllUsers = async (req, res, next) => {
     try {
@@ -75,6 +76,21 @@ export const deleteUser = async (req, res, next) => {
 
         res.status(200).json({ success: true, message: 'Deleted' });
     } catch (error) {
+        next(error);
+    }
+}
+
+export const getImpData = async (req, res, next) => {
+    try {
+        const currUser = req.user;
+        const reqUser = req.params.id;
+
+        if(reqUser !== currUser.id) {
+            return res.status(401).json({ success:false, message: 'Unauthorized' });
+        }
+
+        res.status(200).json({ success: true, data: currUser });
+    } catch(error) {
         next(error);
     }
 }
