@@ -141,19 +141,19 @@ npm start
 ### Register User
 
 ```http
-POST /api/users/register
+POST /v1/api/users/register
 ```
 
 ### Login User
 
 ```http
-POST /api/users/login
+POST /v1/api/users/login
 ```
 
 ### Get Current User
 
 ```http
-GET /api/users/me
+GET /v1/api/users/me
 ```
 
 ---
@@ -163,25 +163,25 @@ GET /api/users/me
 ### Create Subject
 
 ```http
-POST /api/subjects
+POST /v1/api/subjects
 ```
 
 ### Get All Subjects
 
 ```http
-GET /api/subjects
+GET /v1/api/subjects
 ```
 
 ### Update Subject
 
 ```http
-PUT /api/subjects/:id
+PUT /v1/api/subjects/:id
 ```
 
 ### Delete Subject
 
 ```http
-DELETE /api/subjects/:id
+DELETE /v1/api/subjects/:id
 ```
 
 ---
@@ -316,7 +316,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
 ### Endpoint
 
 ```http
-POST /api/users/register
+POST /v1/api/users/register
 ```
 
 ### Authentication Required
@@ -359,7 +359,7 @@ No
 ### Endpoint
 
 ```http
-POST /api/users/login
+POST /v1/api/users/login
 ```
 
 ### Authentication Required
@@ -402,7 +402,7 @@ No
 ### Endpoint
 
 ```http
-GET /api/users/me
+GET /v1/api/users/me
 ```
 
 ### Authentication Required
@@ -437,7 +437,7 @@ Authorization: Bearer your_jwt_token
 ### Endpoint
 
 ```http
-PUT /api/users/:id
+PUT /v1/api/users/:id
 ```
 
 ### Authentication Required
@@ -476,7 +476,7 @@ User can only update their own account unless admin
 ### Endpoint
 
 ```http
-DELETE /api/users/:id
+DELETE /v1/api/users/:id
 ```
 
 ### Authentication Required
@@ -507,7 +507,7 @@ User can only delete their own account unless admin
 ### Endpoint
 
 ```http
-POST /api/users/logout-all
+POST /v1/api/users/logout-all
 ```
 
 ### Authentication Required
@@ -540,7 +540,7 @@ Invalidates all previously issued JWT tokens using tokenVersion increment.
 ### Endpoint
 
 ```http
-POST /api/subjects
+POST /v1/api/subjects
 ```
 
 ### Authentication Required
@@ -599,7 +599,7 @@ attendedClasses <= totalClasses
 ### Endpoint
 
 ```http
-GET /api/subjects
+GET /v1/api/subjects
 ```
 
 ### Authentication Required
@@ -641,7 +641,7 @@ Authorization: Bearer your_jwt_token
 ### Endpoint
 
 ```http
-GET /api/subjects/:id
+GET /v1/api/subjects/:id
 ```
 
 ### Authentication Required
@@ -681,7 +681,7 @@ Users can only access their own subjects
 ### Endpoint
 
 ```http
-PUT /api/subjects/:id
+PUT /v1/api/subjects/:id
 ```
 
 ### Authentication Required
@@ -727,7 +727,7 @@ Users can only update their own subjects
 ### Endpoint
 
 ```http
-DELETE /api/subjects/:id
+DELETE /v1/api/subjects/:id
 ```
 
 ### Authentication Required
@@ -805,7 +805,7 @@ Users can only delete their own subjects
 
 ```js
 const response = await fetch(
-   "https://attendance-tracker-backend-b980.onrender.com/api/subjects",
+   "https://attendance-tracker-backend-b980.onrender.com/v1/api/subjects",
    {
       method: "GET",
       headers: {
