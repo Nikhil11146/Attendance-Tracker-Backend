@@ -2,6 +2,10 @@
 
 A secure and scalable backend API built with Node.js, Express, MongoDB, and Mongoose.
 
+This API is designed to help students manage and track their attendance efficiently. Users can create subjects, store attendance information, monitor attended classes, calculate attendance percentages, and manage academic subjects through secure authenticated routes.
+
+The system acts as a centralized attendance management backend where each user can maintain their own subjects and attendance records safely with authentication and authorization support.
+
 This project includes:
 
 * User authentication using JWT
