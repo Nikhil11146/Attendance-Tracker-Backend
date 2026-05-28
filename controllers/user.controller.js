@@ -54,6 +54,10 @@ export const updateUser = async (req, res, next) => {
 
         const user = await User.findById(id);
 
+        if(!user) {
+            throw new ApiError(404, "User not found");
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
