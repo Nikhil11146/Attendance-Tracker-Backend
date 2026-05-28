@@ -29,9 +29,10 @@ app.get('/', (req, res) => {
     res.send('Hello Welcome to Attendance Tracker Management V1');
 })
 
+await connectDB();
+
 app.listen(PORT, async () => {
     console.log(`App listening at http://localhost:${PORT}`);
-    await connectDB();
 });
 
 export default app;
