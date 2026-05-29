@@ -316,7 +316,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
 ### Endpoint
 
 ```http
-POST /v1/api/users/register
+POST /v1/api/users/sign-up
 ```
 
 ### Authentication Required
@@ -359,7 +359,7 @@ No
 ### Endpoint
 
 ```http
-POST /v1/api/users/login
+POST /v1/api/users/sign-in
 ```
 
 ### Authentication Required
@@ -402,7 +402,7 @@ No
 ### Endpoint
 
 ```http
-GET /v1/api/users/me
+GET /v1/api/users/:id
 ```
 
 ### Authentication Required
@@ -507,7 +507,7 @@ User can only delete their own account unless admin
 ### Endpoint
 
 ```http
-POST /v1/api/users/logout-all
+POST /v1/api/users/log-out-all
 ```
 
 ### Authentication Required
