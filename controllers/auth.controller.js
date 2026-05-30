@@ -34,6 +34,7 @@ export const signUp = async(req, res, next) => {
 
         await session.commitTransaction();
         session.endSession();
+        newUser.password = undefined;
 
         res.status(201).json({
             success: true,
@@ -86,18 +87,10 @@ export const signIn = async(req, res, next) => {
 
 export const logoutAll = async(req, res, next) => {
     try {
-        const { name, password } = req.body;
-
-        const user = await User.findOne({ name }).select("+password");
+        const user = await User.findById(req.user._id);
 
 
         if(!user) {
-            throw new ApiError(401, "Incorrect username or password");
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-
-        if(!isPasswordValid) {
             throw new ApiError(401, "Incorrect username or password");
         }
 

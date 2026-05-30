@@ -11,8 +11,7 @@ const subjectSchema = new mongoose.Schema({
     },
     dept: {
         type: String,
-        enum: ['CSE', 'ECE', 'MECH', 'CIVIL', 'CHEM', 'BIOTECH', 'PE', 'Others'],
-        default: 'CSE'
+        enum: ['CSE', 'ECE', 'MECH', 'CIVIL', 'CHEM', 'BIOTECH', 'PE', 'Others']
     },
     totalClasses: {
         type: Number,
